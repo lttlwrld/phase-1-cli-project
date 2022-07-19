@@ -24,29 +24,26 @@ class CommandLineInterface
         puts "To return to the main menu at any time, type main menu"
         puts "To exit this application at any time, type exit."
         puts ""
-
-        while input = gets.strip
-            case input
-            when "team"
-                puts ""
-                search_by_team
-            when "teams"
-                puts ""
-                search_by_team
-            when "name"
-                puts ""
-                search_by_name
-            when "exit"
-                exit
-            when "main menu"
-                main_menu
-            else
-                puts ""
-                puts "Please enter a valid response."
-                main_menu
-            end
+        input = gets.strip
+        case input
+        when "team"
+            puts ""
+            search_by_team
+        when "teams"
+            puts ""
+            search_by_team
+        when "name"
+            puts ""
+            search_by_name
+        when "exit"
+            exit
+        when "main menu"
+            main_menu
+        else
+            puts ""
+            puts "Please enter a valid response."
+            main_menu
         end
-
     end
 
     def search_by_team
@@ -71,6 +68,8 @@ class CommandLineInterface
                 puts "# #{player.number} - #{player.first_name} #{player.last_name}" if player.number != ""
                 player_numbers << player.number if player.number != ""}
                 break
+            elsif input == "main menu"
+                main_menu
             elsif input == "exit"
                 exit
             else
@@ -249,19 +248,19 @@ class CommandLineInterface
         loop do
             input = gets.strip
             puts ""
-                if input == "main menu"
-                    main_menu
-                elsif input == "exit"
-                    exit
-                else
-                    puts ""
-                    puts "Please enter a valid response."
-                    puts "To start a new search, type main menu."
-                    puts ""
-                    puts "To exit this application, type exit"
-                    puts ""
-                end
+            if input == "main menu"
+                main_menu
+            elsif input == "exit"
+                exit
+            else
+                puts ""
+                puts "Please enter a valid response."
+                puts "To start a new search, type main menu."
+                puts ""
+                puts "To exit this application, type exit"
+                puts ""
             end
         end
+    end
 
 end
