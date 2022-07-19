@@ -3,6 +3,7 @@ require 'open-uri'
 require 'net/http'
 require 'json'
 require 'pry'
+require 'resolv-replace'
 
 require_relative '../lib/scraper.rb'
 require_relative '../lib/players.rb'

@@ -2,4 +2,7 @@
 
 require_relative '../config/environment.rb'
 
+Teams.create_from_api
+Players.create_from_api
+
 binding.pry

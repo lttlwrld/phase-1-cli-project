@@ -20,7 +20,7 @@ class Scraper
         url = URI.parse("https://data.nba.net/data/10s/prod/v1/2022/players/#{player_id}_profile.json")
         response = Net::HTTP.get_response(url)
         hash = JSON.parse(response.body)
-        current_season_stats = hash["league"]["standard"]["stats"]["regularSeason"]["season"][0]
+        stats = hash["league"]["standard"]["stats"]["regularSeason"]["season"]
     end
  
 end
