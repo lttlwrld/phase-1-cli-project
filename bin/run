@@ -3,5 +3,3 @@
 require_relative '../config/environment.rb'
 
 CommandLineInterface.new.run
-
-#binding.pry

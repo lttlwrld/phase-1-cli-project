@@ -88,7 +88,6 @@ class CommandLineInterface
                 team.roster.each {|player| 
                 if player.number == input
                     player.stats
-                    puts ""
                     puts "Name: #{player.first_name} #{player.last_name}"
                     puts "Team: #{player.team.name}"
                     puts "Jersey: ##{player.number}"
@@ -145,13 +144,15 @@ class CommandLineInterface
             input = gets.strip
             puts ""
             search = input.upcase.split(" ")
-            matches = Players.all.select {|player| 
+            exact_match = Players.all.select {|player| 
+            [player.first_name.upcase, player.last_name.upcase].include?(search[0]) && [player.first_name.upcase, player.last_name.upcase].include?(search[1])
+            }
+            close_matches = Players.all.select {|player| 
                 [player.first_name.upcase, player.last_name.upcase].include?(search[0]) || [player.first_name.upcase, player.last_name.upcase].include?(search[1])
                 }
-            if matches.length == 1
-                player = matches[0]
+            if exact_match.length == 1
+                player = exact_match[0]
                 player.stats
-                puts ""
                 puts "Name: #{player.first_name} #{player.last_name}"
                 puts "Team: #{player.team.name}"
                 puts "Jersey: ##{player.number}"
@@ -168,8 +169,27 @@ class CommandLineInterface
                 puts "FT: #{player.ftp}%"
                 puts ""
                 break
-            elsif matches.length > 0
-                matches.each_with_index {|player, index| puts "#{index+1}. #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
+            elsif close_matches.length == 1
+                player = close_matches[0]
+                player.stats
+                puts "Name: #{player.first_name} #{player.last_name}"
+                puts "Team: #{player.team.name}"
+                puts "Jersey: ##{player.number}"
+                puts "Height: #{player.height}"
+                puts "Weight: #{player.weight}"
+                puts "PPG: #{player.ppg}"
+                puts "RPB: #{player.rpg}"
+                puts "APG: #{player.apg}"
+                puts "TOPG: #{player.topg}"
+                puts "BPG: #{player.bpg}"
+                puts "SPG: #{player.spg}"
+                puts "FG: #{player.fgp}%"
+                puts "3PT: #{player.tpp}%"
+                puts "FT: #{player.ftp}%"
+                puts ""
+                break
+            elsif close_matches.length > 0
+                close_matches.each_with_index {|player, index| puts "#{index+1}. #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
                 puts ""
                 puts "Please select desired player by typing in search result number."
                 loop do
@@ -181,7 +201,6 @@ class CommandLineInterface
                     if results.include?(number)
                         player = matches[number-1]
                         player.stats
-                        puts ""
                         puts "Name: #{player.first_name} #{player.last_name}"
                         puts "Team: #{player.team.name}"
                         puts "Jersey: ##{player.number}"
@@ -198,7 +217,7 @@ class CommandLineInterface
                         puts "FT: #{player.ftp}%"
                         puts ""
                         break
-                    elsif input = "exit"
+                    elsif input == "exit"
                         exit
                     else 
                         puts ""
