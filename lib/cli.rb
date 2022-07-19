@@ -21,7 +21,8 @@ class CommandLineInterface
         puts "Learn more about your favorite NBA players and their performance this season!"
         puts "To look up a player by team, type team."
         puts "To look up a player by name, type name."
-        puts "To quit this application, type exit at anytime."
+        puts "To return to the main menu at any time, type main menu"
+        puts "To exit this application at any time, type exit."
         puts ""
 
         while input = gets.strip
@@ -37,6 +38,8 @@ class CommandLineInterface
                 search_by_name
             when "exit"
                 exit
+            when "main menu"
+                main_menu
             else
                 puts ""
                 puts "Please enter a valid response."
@@ -105,6 +108,8 @@ class CommandLineInterface
                     puts ""
                 end}
                 break
+            elsif input == "main menu"
+                main_menu
             elsif input == "exit"
                 exit
             else
@@ -195,11 +200,11 @@ class CommandLineInterface
                 loop do
                     input = gets.strip
                     number = input.to_i
-                    num_of_results = matches.length
+                    num_of_results = close_matches.length
                     puts ""
                     results = Array(1..num_of_results)
                     if results.include?(number)
-                        player = matches[number-1]
+                        player = close_matches[number-1]
                         player.stats
                         puts "Name: #{player.first_name} #{player.last_name}"
                         puts "Team: #{player.team.name}"
@@ -217,6 +222,8 @@ class CommandLineInterface
                         puts "FT: #{player.ftp}%"
                         puts ""
                         break
+                    elsif input == "main menu"
+                        main_menu
                     elsif input == "exit"
                         exit
                     else 
@@ -226,6 +233,10 @@ class CommandLineInterface
                     end
                 end
                 break
+            elsif input == "main menu"
+                main_menu
+            elsif input == "exit"
+                exit
             else
                 puts ""
                 puts "No results. Please try again."
