@@ -17,7 +17,7 @@ class CommandLineInterface
 
     def main_menu
         puts ""
-        puts "Welcome to Baller Stats!"
+        puts "Welcome to Been Ballin' Statistics!"
         puts "Learn more about your favorite NBA players and their performance this season!"
         puts "To look up a player by team, type team."
         puts "To look up a player by name, type name."
@@ -44,6 +44,25 @@ class CommandLineInterface
             puts "Please enter a valid response."
             main_menu
         end
+    end
+
+    def print_stats(player)
+        player.stats
+        puts "Name: #{player.first_name} #{player.last_name}"
+        puts "Team: #{player.team.name}"
+        puts "Jersey: ##{player.number}"
+        puts "Height: #{player.height}"
+        puts "Weight: #{player.weight}"
+        puts "PPG: #{player.ppg}"
+        puts "RPB: #{player.rpg}"
+        puts "APG: #{player.apg}"
+        puts "TOPG: #{player.topg}"
+        puts "BPG: #{player.bpg}"
+        puts "SPG: #{player.spg}"
+        puts "FG: #{player.fgp}%"
+        puts "3PT: #{player.tpp}%"
+        puts "FT: #{player.ftp}%"
+        puts ""
     end
 
     def search_by_team
@@ -89,22 +108,7 @@ class CommandLineInterface
             if player_numbers.include?(input)
                 team.roster.each {|player| 
                 if player.number == input
-                    player.stats
-                    puts "Name: #{player.first_name} #{player.last_name}"
-                    puts "Team: #{player.team.name}"
-                    puts "Jersey: ##{player.number}"
-                    puts "Height: #{player.height}"
-                    puts "Weight: #{player.weight}"
-                    puts "PPG: #{player.ppg}"
-                    puts "RPB: #{player.rpg}"
-                    puts "APG: #{player.apg}"
-                    puts "TOPG: #{player.topg}"
-                    puts "BPG: #{player.bpg}"
-                    puts "SPG: #{player.spg}"
-                    puts "FG: #{player.fgp}%"
-                    puts "3PT: #{player.tpp}%"
-                    puts "FT: #{player.ftp}%"
-                    puts ""
+                    print_stats(player)
                 end}
                 break
             elsif input == "main menu"
@@ -156,41 +160,11 @@ class CommandLineInterface
                 }
             if exact_match.length == 1
                 player = exact_match[0]
-                player.stats
-                puts "Name: #{player.first_name} #{player.last_name}"
-                puts "Team: #{player.team.name}"
-                puts "Jersey: ##{player.number}"
-                puts "Height: #{player.height}"
-                puts "Weight: #{player.weight}"
-                puts "PPG: #{player.ppg}"
-                puts "RPB: #{player.rpg}"
-                puts "APG: #{player.apg}"
-                puts "TOPG: #{player.topg}"
-                puts "BPG: #{player.bpg}"
-                puts "SPG: #{player.spg}"
-                puts "FG: #{player.fgp}%"
-                puts "3PT: #{player.tpp}%"
-                puts "FT: #{player.ftp}%"
-                puts ""
+                print_stats(player)
                 break
             elsif close_matches.length == 1
                 player = close_matches[0]
-                player.stats
-                puts "Name: #{player.first_name} #{player.last_name}"
-                puts "Team: #{player.team.name}"
-                puts "Jersey: ##{player.number}"
-                puts "Height: #{player.height}"
-                puts "Weight: #{player.weight}"
-                puts "PPG: #{player.ppg}"
-                puts "RPB: #{player.rpg}"
-                puts "APG: #{player.apg}"
-                puts "TOPG: #{player.topg}"
-                puts "BPG: #{player.bpg}"
-                puts "SPG: #{player.spg}"
-                puts "FG: #{player.fgp}%"
-                puts "3PT: #{player.tpp}%"
-                puts "FT: #{player.ftp}%"
-                puts ""
+                print_stats(player)
                 break
             elsif close_matches.length > 0
                 close_matches.each_with_index {|player, index| puts "#{index+1}. #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
@@ -204,22 +178,7 @@ class CommandLineInterface
                     results = Array(1..num_of_results)
                     if results.include?(number)
                         player = close_matches[number-1]
-                        player.stats
-                        puts "Name: #{player.first_name} #{player.last_name}"
-                        puts "Team: #{player.team.name}"
-                        puts "Jersey: ##{player.number}"
-                        puts "Height: #{player.height}"
-                        puts "Weight: #{player.weight}"
-                        puts "PPG: #{player.ppg}"
-                        puts "RPB: #{player.rpg}"
-                        puts "APG: #{player.apg}"
-                        puts "TOPG: #{player.topg}"
-                        puts "BPG: #{player.bpg}"
-                        puts "SPG: #{player.spg}"
-                        puts "FG: #{player.fgp}%"
-                        puts "3PT: #{player.tpp}%"
-                        puts "FT: #{player.ftp}%"
-                        puts ""
+                        print_stats(player)
                         break
                     elsif input == "main menu"
                         main_menu
