@@ -20,13 +20,16 @@ class CommandLineInterface
         puts "Welcome to Baller Stats!"
         puts "Learn more about your favorite NBA players and their performance this season!"
         puts "To look up a player by team, type team."
-        puts "To look up a player by their name, type name."
+        puts "To look up a player by name, type name."
         puts "To quit this application, type exit at anytime."
         puts ""
 
         while input = gets.strip
             case input
             when "team"
+                puts ""
+                search_by_team
+            when "teams"
                 puts ""
                 search_by_team
             when "name"
@@ -36,7 +39,7 @@ class CommandLineInterface
                 exit
             else
                 puts ""
-                puts "Please enter a valid response"
+                puts "Please enter a valid response."
                 main_menu
             end
         end
@@ -56,7 +59,6 @@ class CommandLineInterface
         puts ""
         puts "Please select a team by typing the corresponding 3-character abbreviation."
         puts ""
-
         loop do
             input = gets.strip
             puts ""
@@ -76,8 +78,6 @@ class CommandLineInterface
                 puts ""
             end
         end
-        
-            
         puts ""
         puts "Please type a player number to obtain stats."
         puts ""
@@ -90,8 +90,10 @@ class CommandLineInterface
                     player.stats
                     puts ""
                     puts "Name: #{player.first_name} #{player.last_name}"
+                    puts "Team: #{player.team.name}"
                     puts "Jersey: ##{player.number}"
-                    puts "Team: #{player.team}"
+                    puts "Height: #{player.height}"
+                    puts "Weight: #{player.weight}"
                     puts "PPG: #{player.ppg}"
                     puts "RPB: #{player.rpg}"
                     puts "APG: #{player.apg}"
@@ -115,7 +117,7 @@ class CommandLineInterface
             end
         end
         puts "To start a new search, type main menu."
-        puts "To quit this application, type exit"
+        puts "To exit this application, type exit."
         puts ""
         loop do
         input = gets.strip
@@ -126,18 +128,110 @@ class CommandLineInterface
                 exit
             else
                 puts ""
-                puts "To start a new search, type main menu."
-                puts "To quit this application, type exit"
                 puts "Please enter a valid response."
+                puts "To start a new search, type main menu."
+                puts ""
+                puts "To exit this application, type exit"
                 puts ""
             end
         end
     end
 
     def search_by_name
-    end
-
-
-
+        puts ""
+        puts "Please enter player's name."
+        puts ""
+        loop do
+            input = gets.strip
+            puts ""
+            search = input.upcase.split(" ")
+            matches = Players.all.select {|player| 
+                [player.first_name.upcase, player.last_name.upcase].include?(search[0]) || [player.first_name.upcase, player.last_name.upcase].include?(search[1])
+                }
+            if matches.length == 1
+                player = matches[0]
+                player.stats
+                puts ""
+                puts "Name: #{player.first_name} #{player.last_name}"
+                puts "Team: #{player.team.name}"
+                puts "Jersey: ##{player.number}"
+                puts "Height: #{player.height}"
+                puts "Weight: #{player.weight}"
+                puts "PPG: #{player.ppg}"
+                puts "RPB: #{player.rpg}"
+                puts "APG: #{player.apg}"
+                puts "TOPG: #{player.topg}"
+                puts "BPG: #{player.bpg}"
+                puts "SPG: #{player.spg}"
+                puts "FG: #{player.fgp}%"
+                puts "3PT: #{player.tpp}%"
+                puts "FT: #{player.ftp}%"
+                puts ""
+                break
+            elsif matches.length > 0
+                matches.each_with_index {|player, index| puts "#{index+1}. #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
+                puts ""
+                puts "Please select desired player by typing in search result number."
+                loop do
+                    input = gets.strip
+                    number = input.to_i
+                    num_of_results = matches.length
+                    puts ""
+                    results = Array(1..num_of_results)
+                    if results.include?(number)
+                        player = matches[number-1]
+                        player.stats
+                        puts ""
+                        puts "Name: #{player.first_name} #{player.last_name}"
+                        puts "Team: #{player.team.name}"
+                        puts "Jersey: ##{player.number}"
+                        puts "Height: #{player.height}"
+                        puts "Weight: #{player.weight}"
+                        puts "PPG: #{player.ppg}"
+                        puts "RPB: #{player.rpg}"
+                        puts "APG: #{player.apg}"
+                        puts "TOPG: #{player.topg}"
+                        puts "BPG: #{player.bpg}"
+                        puts "SPG: #{player.spg}"
+                        puts "FG: #{player.fgp}%"
+                        puts "3PT: #{player.tpp}%"
+                        puts "FT: #{player.ftp}%"
+                        puts ""
+                        break
+                    elsif input = "exit"
+                        exit
+                    else 
+                        puts ""
+                        puts "Please enter a valid response."
+                        puts ""
+                    end
+                end
+                break
+            else
+                puts ""
+                puts "No results. Please try again."
+                puts ""
+            end
+        end
+        puts "To start a new search, type main menu."
+        puts "To exit this application, type exit."
+        puts ""
+        loop do
+            input = gets.strip
+            puts ""
+                if input == "main menu"
+                    main_menu
+                elsif input == "exit"
+                    exit
+                else
+                    puts ""
+                    puts "Please enter a valid response."
+                    puts "To start a new search, type main menu."
+                    puts ""
+                    puts "To exit this application, type exit"
+                    puts ""
+                end
+            end
+        end
 
 end

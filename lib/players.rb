@@ -10,7 +10,7 @@ class Players
         @player_id = player_hash["personId"]
         @team_id = player_hash["teamId"]
         Teams.all.each do |team| 
-            @team = team.name if team.team_id == @team_id
+            @team = team if team.team_id == @team_id
             team.roster << self if team.team_id == @team_id
         end
         @number = player_hash["jersey"] 
