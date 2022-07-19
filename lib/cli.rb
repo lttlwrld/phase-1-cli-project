@@ -132,8 +132,8 @@ class CommandLineInterface
             else
                 puts ""
                 puts "Please enter a valid response."
-                puts "To start a new search, type main menu."
                 puts ""
+                puts "To start a new search, type main menu."
                 puts "To exit this application, type exit"
                 puts ""
             end
@@ -255,8 +255,8 @@ class CommandLineInterface
             else
                 puts ""
                 puts "Please enter a valid response."
-                puts "To start a new search, type main menu."
                 puts ""
+                puts "To start a new search, type main menu."
                 puts "To exit this application, type exit"
                 puts ""
             end
