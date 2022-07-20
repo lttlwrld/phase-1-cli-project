@@ -66,9 +66,6 @@ class CommandLineInterface
     end
 
     def search_by_team
-        team = nil
-        tricodes = []
-        player_numbers = []
 
         Teams.all.each {|team| 
             puts "#{team.tricode} - #{team.name}"
@@ -79,6 +76,9 @@ class CommandLineInterface
         puts "Please select a team by typing the corresponding 3-character abbreviation."
         puts ""
         loop do
+            team = nil
+            tricodes = []
+            player_numbers = []
             input = gets.strip
             puts ""
             if tricodes.include?(input.upcase)
