@@ -79,6 +79,7 @@ class CommandLineInterface
             puts
             if tricodes.include?(input.upcase)
                 Teams.all.each {|t| team = t if input.upcase == t.tricode}
+                puts "#{team.name}\n "
                 team.roster.each {|player| 
                 puts "# #{player.number} - #{player.first_name} #{player.last_name}" if player.number != ""
                 player_numbers << player.number if player.number != ""}
