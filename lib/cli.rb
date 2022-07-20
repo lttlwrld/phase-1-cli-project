@@ -76,8 +76,8 @@ class CommandLineInterface
         puts "\nPlease select a team by typing the corresponding 3-character abbreviation.\n "
         loop do
             input = gets.strip
-            puts
             if tricodes.include?(input.upcase)
+                puts
                 Teams.all.each {|t| team = t if input.upcase == t.tricode}
                 puts "#{team.name}\n "
                 team.roster.each {|player| 
@@ -89,6 +89,7 @@ class CommandLineInterface
             elsif input == "exit"
                 exit
             else
+                puts
                 Teams.all.each {|team| puts "#{team.tricode} - #{team.name}"}
                 invalid_input
             end
