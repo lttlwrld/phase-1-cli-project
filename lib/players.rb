@@ -37,6 +37,20 @@ class Players
             @tpp = stats_hash[0]["total"]["tpp"]
             @ftp = stats_hash[0]["total"]["ftp"]
         end
+        puts "\nName: #{@first_name} #{@last_name}"
+        puts "Team: #{@team.name}"
+        puts "Jersey: ##{@number}"
+        puts "Height: #{@height}"
+        puts "Weight: #{@weight}"
+        puts "PPG: #{@ppg}"
+        puts "RPB: #{@rpg}"
+        puts "APG: #{@apg}"
+        puts "TOPG: #{@topg}"
+        puts "BPG: #{@bpg}"
+        puts "SPG: #{@spg}"
+        puts "FG: #{@fgp}%"
+        puts "3PT: #{@tpp}%"
+        puts "FT: #{@ftp}%"
     end
         
     def self.all
