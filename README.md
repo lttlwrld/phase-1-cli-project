@@ -1,4 +1,4 @@
-# Been Ballin? Statistics!
+# Been Ballin? Statistics
 
 
 ## About 
