@@ -104,7 +104,6 @@ class CommandLineInterface
                 puts
                 team.roster.each {|player| 
                     if player.number != ""
-                        print "# "
                         print "#{player.number}".bold
                         puts" - #{player.first_name} #{player.last_name}"
                         player_numbers << player.number
@@ -163,7 +162,9 @@ class CommandLineInterface
                 break
             elsif close_matches.length > 0
                 puts
-                close_matches.each_with_index {|player, index| puts "#{index+1}. #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
+                close_matches.each_with_index {|player, index| 
+                    print "#{index+1}".bold 
+                    puts " - #{player.first_name} #{player.last_name} - #{player.team.tricode}"}
                 puts "\nPlease select desired player by typing in search result number.\n "
                 loop do
                     input = gets.strip

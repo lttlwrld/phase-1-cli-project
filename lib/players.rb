@@ -35,6 +35,7 @@ class Players
             @spg = stats["spg"]
             @fgp = stats["fgp"]
             @tpp = stats["tpp"]
+            @ftp = stats["ftp"]
         end
     end
 
