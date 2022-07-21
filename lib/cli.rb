@@ -63,7 +63,26 @@ class CommandLineInterface
         end
     end
 
-    def stats(player)
+    def list_teams
+        Teams.all.each {|team| 
+            print "#{team.tricode}".bold 
+            puts " - #{team.name}"
+        }
+    end
+
+    def list_roster(team)
+        puts
+        puts "#{team.name}".underline
+        puts
+        team.roster.each {|player| 
+            if player.number != ""
+                print "#{player.number}".bold
+                puts" - #{player.first_name} #{player.last_name}"
+            end
+        }
+    end
+
+    def list_stats(player)
         player.get_stats
         puts "\nName: #{player.first_name} #{player.last_name}"
         puts "Team: #{player.team.name}"
@@ -84,31 +103,18 @@ class CommandLineInterface
     end
 
     def search_by_team
-
         team = nil
         tricodes = []
         player_numbers = []
-        Teams.all.each {|team| 
-            print "#{team.tricode}".bold 
-            puts " - #{team.name}"
-            tricodes << team.tricode
-        }
-
+        Teams.all.each {|team| tricodes << team.tricode}
+        list_teams
         puts "\nPlease select a team by typing the corresponding 3-character abbreviation.\n "
         loop do
             input = gets.strip
             if tricodes.include?(input.upcase)
                 Teams.all.each {|t| team = t if input.upcase == t.tricode}
-                puts
-                puts "#{team.name}".underline
-                puts
-                team.roster.each {|player| 
-                    if player.number != ""
-                        print "#{player.number}".bold
-                        puts" - #{player.first_name} #{player.last_name}"
-                        player_numbers << player.number
-                    end
-                }
+                team.roster.each {|player| player_numbers << player.number if player.number != ""}
+                list_roster(team)
                 break
             elsif input == "main menu"
                 main_menu
@@ -116,7 +122,7 @@ class CommandLineInterface
                 exit
             else
                 puts
-                Teams.all.each {|team| puts "#{team.tricode} - #{team.name}"}
+                list_teams
                 invalid_input
             end
         end
@@ -126,7 +132,7 @@ class CommandLineInterface
             if player_numbers.include?(input)
                 team.roster.each {|player| 
                 if player.number == input
-                    stats(player)
+                    list_stats(player)
                 end}
                 break
             elsif input == "main menu"
@@ -134,7 +140,7 @@ class CommandLineInterface
             elsif input == "exit"
                 exit
             else
-                team.roster.each {|player| puts "# #{player.number} - #{player.first_name} #{player.last_name}" if player.number != ""}
+                list_roster(team)
                 invalid_input
             end
         end
@@ -154,11 +160,11 @@ class CommandLineInterface
                 }
             if exact_match.length == 1
                 player = exact_match[0]
-                stats(player)
+                list_stats(player)
                 break
             elsif close_matches.length == 1
                 player = close_matches[0]
-                stats(player)
+                list_stats(player)
                 break
             elsif close_matches.length > 0
                 puts
@@ -173,7 +179,7 @@ class CommandLineInterface
                     results = Array(1..num_of_results)
                     if results.include?(number)
                         player = close_matches[number-1]
-                        stats(player)
+                        list_stats(player)
                         break
                     elsif input == "main menu"
                         main_menu
