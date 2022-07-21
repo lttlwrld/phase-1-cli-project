@@ -9,13 +9,13 @@ class Players
         @last_name = player_hash["lastName"]
         @player_id = player_hash["personId"]
         @team_id = player_hash["teamId"]
-        self.get_team
         @dob = player_hash["dateOfBirthUTC"]
-        self.get_age if @dob != ""
         @number = player_hash["jersey"]
         @position = player_hash["pos"]
-        @height = "#{player_hash["heightFeet"]}\'#{player_hash["heightInches"]}\"  -  #{player_hash["heightMeters"]}m" 
+        @height = "#{player_hash["heightFeet"]}\'#{player_hash["heightInches"]}\" - #{player_hash["heightMeters"]}m" 
         @weight = "#{player_hash["weightPounds"]}lbs - #{player_hash["weightKilograms"]}kg"
+        self.get_team
+        self.get_age if @dob != ""
         @@all << self
     end
 

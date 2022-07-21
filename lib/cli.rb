@@ -70,7 +70,7 @@ class CommandLineInterface
         puts "Jersey: ##{player.number}" if player.number != ""
         puts "Position: #{player.position}" if player.position != ""
         puts "Age: #{player.age}" if player.dob != ""
-        puts "Height: #{player.height}" if player.height != "-\'-\"  -  m"
+        puts "Height: #{player.height}" if player.height != "-\'-\" - m"
         puts "Weight: #{player.weight}" if player.weight != "lbs - kg"
         puts "PPG: #{player.ppg}" if player.ppg
         puts "RPB: #{player.rpg}" if player.rpg
