@@ -26,4 +26,4 @@ Please read [CONTRIBUTING.md](https://github.com/lttlwrld/phase-1-cli-project/bl
 
 ## License
 
-This project is licensed under the MIT License. Read [LICENSE](https://github.com/lttlwrld/phase-1-cli-project/blob/main/LICENSE)
+This project is licensed under the MIT License. See [LICENSE](https://github.com/lttlwrld/phase-1-cli-project/blob/main/LICENSE).
