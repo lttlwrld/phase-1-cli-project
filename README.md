@@ -1,3 +1,29 @@
-# phase-1-cli-project
+# Been Ballin? Statistics!
 
-Welcome to my final project for Phase 1 of the Flatiron School. This application will be a CLI that takes data from the NBA and provide users stats about their favorite players. Players are searchable by name or by team, and the app will provide user with information such as draft pick, points per game, rebounds, assits, field goal percentage and much more!
+
+## About 
+Hello and welcome to Been Ballin? Statistics, my Phase 1 Project for the Flatiron School. Has your favorite NBA player been ballin out this season? Check out their statistics and see for yourself! Players are searchable by team or by name.
+
+## Installation & Startup
+
+1. Clone repo.
+
+2. Install any missing gems.
+
+```bash
+$ bundle install
+```
+
+3. Run the program.
+
+```bash
+$ ruby/bin run
+```
+## Contributing 
+
+Please read [CONTRIBUTING.md](https://github.com/lttlwrld/phase-1-cli-project/blob/main/CONTRIBUTING.md) for a contributor's guide. 
+
+
+## License
+
+This project is licensed under the MIT License. Read [LICENSE](https://github.com/lttlwrld/phase-1-cli-project/blob/main/LICENSE)
