@@ -94,7 +94,7 @@ class CommandLineInterface
                 invalid_input
             end
         end
-        puts "\nPlease type a player number to obtain stats.\n "
+        puts "\nPlease enter a player's number to obtain stats.\n "
         loop do
             input = gets.strip
             if player_numbers.include?(input)
