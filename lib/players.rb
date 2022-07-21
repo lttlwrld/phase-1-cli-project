@@ -1,6 +1,6 @@
 class Players
 
-    attr_reader :first_name, :last_name, :player_id, :team_id, :team, :number, :weight, :height, :ppg, :rpg, :apg, :topg, :bpg, :spg, :fgp, :tpp, :ftp 
+    attr_reader :first_name, :last_name, :player_id, :team_id, :team, :dob, :age, :number, :position, :weight, :height, :ppg, :rpg, :apg, :topg, :bpg, :spg, :fgp, :tpp, :ftp 
 
     @@all = []
 
@@ -9,13 +9,13 @@ class Players
         @last_name = player_hash["lastName"]
         @player_id = player_hash["personId"]
         @team_id = player_hash["teamId"]
-        Teams.all.each do |team| 
-            @team = team if team.team_id == @team_id
-            team.roster << self if team.team_id == @team_id
-        end
-        @number = player_hash["jersey"] 
+        self.get_team
+        @dob = player_hash["dateOfBirthUTC"]
+        self.get_age if @dob != ""
+        @number = player_hash["jersey"]
+        @position = player_hash["pos"]
         @height = "#{player_hash["heightFeet"]}\'#{player_hash["heightInches"]}\"  -  #{player_hash["heightMeters"]}m" 
-        @weight = "#{player_hash["weightPounds"]}lbs  - #{player_hash["weightKilograms"]}kg"
+        @weight = "#{player_hash["weightPounds"]}lbs - #{player_hash["weightKilograms"]}kg"
         @@all << self
     end
 
@@ -24,37 +24,38 @@ class Players
         players.each {|player| Players.new(player)}
     end
 
-    def stats
-        stats_hash = Scraper.get_player_stats(@player_id)
-        if stats_hash != []
-            @ppg = stats_hash[0]["total"]["ppg"]
-            @rpg = stats_hash[0]["total"]["rpg"]
-            @apg = stats_hash[0]["total"]["apg"]
-            @topg = stats_hash[0]["total"]["topg"]
-            @bpg = stats_hash[0]["total"]["bpg"]
-            @spg = stats_hash[0]["total"]["spg"]
-            @fgp = stats_hash[0]["total"]["fgp"]
-            @tpp = stats_hash[0]["total"]["tpp"]
-            @ftp = stats_hash[0]["total"]["ftp"]
+    def get_stats
+        stats = Scraper.get_player_stats(@player_id)
+        if !stats.empty?
+            @ppg = stats["ppg"]
+            @rpg = stats["rpg"]
+            @apg = stats["apg"]
+            @topg = stats["topg"]
+            @bpg = stats["bpg"]
+            @spg = stats["spg"]
+            @fgp = stats["fgp"]
+            @tpp = stats["tpp"]
         end
-        puts "\nName: #{@first_name} #{@last_name}"
-        puts "Team: #{@team.name}"
-        puts "Jersey: ##{@number}"
-        puts "Height: #{@height}"
-        puts "Weight: #{@weight}"
-        puts "PPG: #{@ppg}"
-        puts "RPB: #{@rpg}"
-        puts "APG: #{@apg}"
-        puts "TOPG: #{@topg}"
-        puts "BPG: #{@bpg}"
-        puts "SPG: #{@spg}"
-        puts "FG: #{@fgp}%"
-        puts "3PT: #{@tpp}%"
-        puts "FT: #{@ftp}%"
     end
-        
+
     def self.all
         @@all
+    end
+
+    def get_team
+        Teams.all.each do |team| 
+            @team = team if team.team_id == @team_id
+            team.roster << self if team.team_id == @team_id
+        end
+    end
+
+    def get_age
+        birthday = @dob.split("-").collect {|num| num.to_i}
+        if birthday[1] >= Time.now.month && birthday[2] >= Time.now.day
+            @age = Time.now.year-birthday[0]-1
+        else
+            @age = Time.now.year-birthday[0]
+        end
     end
 
 end

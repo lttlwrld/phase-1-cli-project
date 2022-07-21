@@ -21,6 +21,10 @@ class Scraper
         response = Net::HTTP.get_response(url)
         hash = JSON.parse(response.body)
         stats = hash["league"]["standard"]["stats"]["regularSeason"]["season"]
+        if !stats.empty?
+            stats = hash["league"]["standard"]["stats"]["regularSeason"]["season"][0]["total"]
+        end
+        stats
     end
  
 end

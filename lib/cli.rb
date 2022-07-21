@@ -63,6 +63,26 @@ class CommandLineInterface
         end
     end
 
+    def stats(player)
+        player.get_stats
+        puts "\nName: #{player.first_name} #{player.last_name}"
+        puts "Team: #{player.team.name}"
+        puts "Jersey: ##{player.number}" if player.number != ""
+        puts "Position: #{player.position}" if player.position != ""
+        puts "Age: #{player.age}" if player.dob != ""
+        puts "Height: #{player.height}" if player.height != "-\'-\"  -  m"
+        puts "Weight: #{player.weight}" if player.weight != "lbs - kg"
+        puts "PPG: #{player.ppg}" if player.ppg
+        puts "RPB: #{player.rpg}" if player.rpg
+        puts "APG: #{player.apg}" if player.apg
+        puts "TOPG: #{player.topg}" if player.topg
+        puts "BPG: #{player.bpg}" if player.bpg
+        puts "SPG: #{player.spg}" if player.spg 
+        puts "FG: #{player.fgp}%" if player.fgp
+        puts "3PT: #{player.tpp}%" if player.tpp
+        puts "FT: #{player.ftp}%" if player.ftp
+    end
+
     def search_by_team
 
         team = nil
@@ -100,7 +120,7 @@ class CommandLineInterface
             if player_numbers.include?(input)
                 team.roster.each {|player| 
                 if player.number == input
-                    player.stats
+                    stats(player)
                 end}
                 break
             elsif input == "main menu"
@@ -128,11 +148,11 @@ class CommandLineInterface
                 }
             if exact_match.length == 1
                 player = exact_match[0]
-                player.stats
+                stats(player)
                 break
             elsif close_matches.length == 1
                 player = close_matches[0]
-                player.stats
+                stats(player)
                 break
             elsif close_matches.length > 0
                 puts
@@ -145,7 +165,7 @@ class CommandLineInterface
                     results = Array(1..num_of_results)
                     if results.include?(number)
                         player = close_matches[number-1]
-                        player.stats
+                        stats(player)
                         break
                     elsif input == "main menu"
                         main_menu
