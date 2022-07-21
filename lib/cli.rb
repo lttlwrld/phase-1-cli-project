@@ -89,7 +89,8 @@ class CommandLineInterface
         tricodes = []
         player_numbers = []
         Teams.all.each {|team| 
-            puts "#{team.tricode} - #{team.name}"
+            print "#{team.tricode}".bold 
+            puts " - #{team.name}"
             tricodes << team.tricode
         }
 
@@ -97,12 +98,18 @@ class CommandLineInterface
         loop do
             input = gets.strip
             if tricodes.include?(input.upcase)
-                puts
                 Teams.all.each {|t| team = t if input.upcase == t.tricode}
-                puts "#{team.name}\n "
+                puts
+                puts "#{team.name}".underline
+                puts
                 team.roster.each {|player| 
-                puts "# #{player.number} - #{player.first_name} #{player.last_name}" if player.number != ""
-                player_numbers << player.number if player.number != ""}
+                    if player.number != ""
+                        print "# "
+                        print "#{player.number}".bold
+                        puts" - #{player.first_name} #{player.last_name}"
+                        player_numbers << player.number
+                    end
+                }
                 break
             elsif input == "main menu"
                 main_menu
