@@ -21,7 +21,7 @@ $ ruby/bin run
 
 4. Use the command prompt to look up your favorite player.
 
-```shell
+```
 Welcome to Been Ballin' Statistics!
 Learn more about your favorite NBA players and their performance this season!
 To look up a player by team, type team.
@@ -32,7 +32,7 @@ To exit this application at any time, type exit.
 
 5. Navigate through the prompts to find player stats.
 
-```shell
+```
 Name: Luka Doncic
 Team: Dallas Mavericks
 Jersey: #77
