@@ -1,17 +1,9 @@
 class CommandLineInterface
 
     def run
-        create_teams
-        create_players
-        main_menu
-    end
-
-    def create_teams
         Teams.create_from_api
-    end
-
-    def create_players
         Players.create_from_api
+        main_menu
     end
 
     def main_menu
