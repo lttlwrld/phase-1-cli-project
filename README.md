@@ -5,7 +5,7 @@ Hello and welcome to Been Ballin? Statistics, my Phase 1 Project for the Flatiro
 
 ### Installation & Instructions
 
-1. Clone repository from [GitHub](https://github.com/lttlwrld/phase-1-cli-project.)
+1. Clone repository from [GitHub](https://github.com/lttlwrld/phase-1-cli-project)
 
 2. Install any missing gems.
 
