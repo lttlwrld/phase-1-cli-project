@@ -1,0 +1,38 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.3)
+    colorize (0.8.1)
+    date (3.2.2)
+    json (2.6.2)
+    method_source (1.0.0)
+    net-http (0.2.2)
+      uri
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
+    open-uri (0.2.0)
+      stringio
+      time
+      uri
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    racc (1.6.0)
+    stringio (3.0.2)
+    time (0.2.0)
+      date
+    uri (0.11.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  colorize
+  json
+  net-http
+  nokogiri
+  open-uri
+  pry
+
+BUNDLED WITH
+   2.3.13

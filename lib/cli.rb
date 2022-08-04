@@ -7,7 +7,7 @@ class CommandLineInterface
     end
 
     def main_menu
-        puts "\nWelcome to Been Ballin' Statistics!"
+        puts "\nWelcome to Been Ballin? Statistics!"
         puts "Learn more about your favorite NBA players and their performance this season!"
         puts "To look up a player by team, type team."
         puts "To look up a player by name, type name."
